@@ -1,16 +1,15 @@
 #!/bin/sh
 
-# Can execute only ROOT
-if [ "`id -un`" != "root" ]
-then
-	echo "Please change to root."
-	exit 1
-fi
-
 # work directory
 GIT_WORK_DIR=Soft-Patch-Panel_tools
 GIT_COPY_DIR=.git_template
 TARGET_USER_NAME=tx_*
+
+# Non-ROOT users update their own directories only.
+if [ "`id -un`" != "root" ]
+then
+	TARGET_USER_NAME=`whoami`
+fi
 
 # git clone
 cd /tmp
