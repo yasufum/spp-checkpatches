@@ -62,6 +62,52 @@ for file in `git diff-index --cached --name-only HEAD`; do
 	esac
 done
 
+x=80
+numLine=0
+echo 0 > ./kazu
+git diff --cached > ./test
+
+while read line
+
+  do
+
+      if
+         [ $((`echo "$line" | wc -m` -1 )) -le $x ]; then
+         numLine=$((numLine + 1))
+         echo 0 >> ./kazu
+
+      elif
+         echo "$line" | grep '^\+.*' >/dev/null  ; then
+         numLine=$((numLine + 1))
+         echo ----------------------------------
+         echo WARNING:LONG_LINE: line over 80 characters
+         echo $numLine:$line
+         echo ----------------------------------
+         echo 1  >>  ./kazu
+
+      else
+         numLine=$((numLine + 1))
+         echo 0  >>  ./kazu
+      fi
+
+  done < ./test
+rm  ./test
+
+while read line
+
+  do
+
+      if [ $line -gt  0 ] ; then
+         rm ./kazu
+
+         exit 2
+
+      fi
+
+  done < ./kazu
+
+exit
+
 # work directory
 export SPP_HOME=`pwd`
 export SPP_DIR=`basename ${SPP_HOME}`
