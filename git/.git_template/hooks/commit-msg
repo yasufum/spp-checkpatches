@@ -23,55 +23,9 @@
 #        exit 1
 #}
 
-numLine=0
-mkdir -p ./temp
-cat $1 > ./temp/commitmsg
-echo 0 > ./temp/kazu
-
-while read line
-
- do
-
-   if 
-      [ $((`echo "$line" | wc -m`  )) -le 72 ]; then
-          numLine=$((numLine + 1))
-          echo 0 >> ./temp/kazu
-
-   elif
-         echo "$line" | grep '^\#' >/dev/null  ; then
-             numLine=$((numLine + 1))
-              echo 0 >> ./temp/kazu
-   else 
-   
-             numLine=$((numLine + 1))     
-         echo ----------------------------------
-         echo WARNING:LONG_LINE: line over  72characters
-         echo $numLine:$line
-         echo ----------------------------------
-         echo 1 >> ./temp/kazu
-
-   fi
-
- done < ./temp/commitmsg
-
-while read line
-
-  do
-
-      if [ $line -gt  0 ] ; then
-         rm ./temp/commitmsg
-         rm ./temp/kazu
-         rmdir ./temp
-
-         exit 1
-
-      fi
-
-  done < ./kazu
-
-
-rm ./temp/commitmsg
-rm ./temp/kazu
-rmdir ./temp
-
-exit   
+LEN=`wc -L $1`
+if [ "`echo ${LEN%% *}`" -gt 72 ];then
+   echo "$file exceed max character 72, exit 1"
+   exit 1
+fi
+exit 0
