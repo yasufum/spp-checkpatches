@@ -140,7 +140,7 @@ export CHECK_PATCH_FILE=`whoami`_`date "+%Y%m%d-%H%M%S"`.patch
 echo "Signed-off-by:" > /tmp/${CHECK_PATCH_FILE}
 git diff --cached >> /tmp/${CHECK_PATCH_FILE}
 
-export DPDK_CHECKPATCH_PATH=`locate -l 1 /usr/src/*/checkpatch.pl`
+export DPDK_CHECKPATCH_PATH=`find /usr/src -name checkpatch.pl | xargs ls -t | head -1`
 
 ${RTE_SDK}/devtools/checkpatches.sh /tmp/${CHECK_PATCH_FILE}
 RET=${?}
