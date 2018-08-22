@@ -1,0 +1,12 @@
+Soft Patch Panel tools
+======================
+
+The goal of Soft Patch Panel tools is to provide git related check toools
+for Soft Patch Panel developers.
+
+Tool consists of the followings;
+- Git hooks (pre-commit, commit-msg) to check if developer follwos DPDK
+  guidelines when perform commit
+- git_hook_update.sh which downloads and updates above mentioned hooks to
+  local machine. This shell is assumed to use with cron tab to make update
+  periodically.
