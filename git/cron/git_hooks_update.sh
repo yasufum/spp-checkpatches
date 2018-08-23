@@ -13,7 +13,7 @@ fi
 
 # git clone
 cd /tmp
-git clone https://github.com/ntt-ns/Soft-Patch-Panel_tools.git
+git clone https://github.com/ntt-ns/spp-checkpatches.git
 RET=${?}
 if [ ${RET} -ne 0 ]
 then
