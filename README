@@ -1,8 +1,8 @@
-Soft Patch Panel tools
+spp-checkpatches
 ======================
 
-The goal of Soft Patch Panel tools is to provide git related check toools
-for Soft Patch Panel developers.
+The goal of spp-checkpatches is to provide git related check for Soft Patch
+Panel developers.
 
 Tool consists of the followings;
 - Git hooks (pre-commit, commit-msg) to perform checkpatches.sh and compile
